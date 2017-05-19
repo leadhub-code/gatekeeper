@@ -7,8 +7,12 @@
   "author": "Petr Messner <petr.messner@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "express": "^4.15.3",
     "next": "^2.4.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
+  },
+  "scripts": {
+    "dev": "node server"
   }
 }
