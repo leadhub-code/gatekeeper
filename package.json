@@ -1,0 +1,9 @@
+{
+  "name": "static-gate",
+  "version": "0.0.1",
+  "description": "Login gate for static files",
+  "main": "index.js",
+  "repository": "https://github.com/leadhub-code/static-gate",
+  "author": "Petr Messner <petr.messner@gmail.com>",
+  "license": "MIT"
+}
