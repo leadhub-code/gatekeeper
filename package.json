@@ -5,5 +5,10 @@
   "main": "index.js",
   "repository": "https://github.com/leadhub-code/static-gate",
   "author": "Petr Messner <petr.messner@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "next": "^2.4.0",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4"
+  }
 }
