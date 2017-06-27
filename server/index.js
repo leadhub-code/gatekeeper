@@ -85,6 +85,7 @@ app.prepare()
 
   server.use((req, res, next) => {
     req.siteTitle = configuration.get('site_title') || 'Gatekeeper';
+    console.info('req:', req.user || '-', req.method, req.url);
     next();
   })
 
