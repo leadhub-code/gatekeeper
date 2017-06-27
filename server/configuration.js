@@ -15,4 +15,8 @@ if (!confPath) {
   });
 }
 
+if (nconf.get('session_secret') == 'topsecretstringhere') {
+  throw new Error("You are supposed to change the value of session_secret");
+}
+
 export default nconf;
