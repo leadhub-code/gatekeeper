@@ -21,6 +21,11 @@ require("babel-register");
 
 const configuration = require('./configuration').default
 
+AWS.config.credentials = new AWS.Credentials({
+  accessKeyId: configuration.get('aws:access_key_id'),
+  secretAccessKey: configuration.get('aws:access_key_secret'),
+});
+
 const s3 = new AWS.S3();
 
 console.info()
@@ -100,6 +105,9 @@ app.prepare()
   //server.get('/debug', (req, res) => res.json(req.user))
 
   server.get('/api/s3/prefixes', (req, res) => {
+    if (!req.user) {
+      res.redirect('/');
+    }
     const s3bucketName = configuration.get('aws:s3_bucket');
     const prefixesWithIndex = [];
 
@@ -135,7 +143,7 @@ app.prepare()
       //console.info('prefixesWithIndex:', JSON.stringify(prefixesWithIndex));
       res.json({ prefixesWithIndex });
     }).catch((err) => {
-      //console.info('err:', err);
+      console.info(req.path, 'err:', err);
       res.status(500).send('Error: ' + JSON.stringify(err));
     });
   });
