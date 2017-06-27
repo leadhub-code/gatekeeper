@@ -1,0 +1,5 @@
+.git
+.next
+local
+node_modules
+*.log
