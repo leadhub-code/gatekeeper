@@ -10,7 +10,14 @@ const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
 
 const AWS = require('aws-sdk')
 
-require("babel-register")
+require("babel-register");
+
+// make it easily stoppable if running inside Docker container
+["SIGINT", "SIGTERM"].map((sig) => {
+  process.on(sig, () => {
+    process.exit();
+  })
+});
 
 const configuration = require('./configuration').default
 
@@ -175,6 +182,6 @@ app.prepare()
 
   server.listen(3000, (err) => {
     if (err) throw err
-    console.log('> Ready on http://localhost:3000')
+    console.log(`> Ready on http://localhost:3000 (pid ${process.pid})`)
   })
 })
