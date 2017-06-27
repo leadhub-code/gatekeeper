@@ -107,6 +107,7 @@ app.prepare()
   server.get('/api/s3/prefixes', (req, res) => {
     if (!req.user) {
       res.redirect('/');
+      return;
     }
     const s3bucketName = configuration.get('aws:s3_bucket');
     const prefixesWithIndex = [];
@@ -151,6 +152,7 @@ app.prepare()
   server.get('/s3/*', (req, res) => {
     if (!req.user) {
       res.redirect('/');
+      return;
     }
     let path = req.path.substr(4);
     if (path.endsWith('/')) {
