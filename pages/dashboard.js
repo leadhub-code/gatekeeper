@@ -45,8 +45,9 @@ class IndexPage extends React.Component {
   }
 
   async componentDidMount() {
-    const res = await fetch('/api/s3/prefixes')
-    const { prefixesWithIndex } = await res.json()
+    const res = await fetch('/api/s3/prefixes', { credentials: 'same-origin' });
+    // ^^^ https://stackoverflow.com/questions/34558264/fetch-api-with-cookie
+    const { prefixesWithIndex } = await res.json();
     this.setState({ prefixesWithIndex });
   }
 
@@ -56,8 +57,6 @@ class IndexPage extends React.Component {
     const links = prefixesWithIndex.map((prefix) => (
       <li key={prefix}><a href={'/s3/' + prefix}>{prefix}</a></li>
     ))
-
-
     return (
       <div>
         <IndexHead />
