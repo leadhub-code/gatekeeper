@@ -1,0 +1,13 @@
+aws:
+    access_key_id: AKIAJG...
+    access_key_secret: MpCxw...
+    s3_bucket: example-docs
+google_oauth2:
+    client_id: 292...rkl.apps.googleusercontent.com
+    client_secret: 7i...ng
+    callback_url: https://docs.example.com/auth/google/callback
+site_title: ACME docs
+session_secret: topsecretstringhere
+allowed_emails:
+    - developer1@example.com
+    - developer2@example.com
