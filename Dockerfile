@@ -13,7 +13,7 @@ RUN yarn install
 COPY . /app/
 RUN yarn run build
 
-RUN useradd --no-create-home --system --uid 900 app
+RUN useradd --create-home --system --uid 900 app
 USER app
 
 EXPOSE 3000
