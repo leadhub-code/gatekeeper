@@ -163,14 +163,15 @@ app.prepare()
     const params = {
       'Bucket': s3bucketName,
       'Key': path,
-    }
+    };
     s3.getObject(params).promise().then((data) => {
       //console.info(data);
       if (data['ContentType']) {
-        res.set('Content-Type', data['ContentType'])
+        res.set('Content-Type', data['ContentType']);
       }
+      res.set('Cache-Control', 'private, max-age=60');
       if (data['Body']) {
-        res.send(data['Body'])
+        res.send(data['Body']);
       } else {
         res.json({ data });
       }
