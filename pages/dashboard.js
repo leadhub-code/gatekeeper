@@ -1,32 +1,58 @@
-import Head from 'next/head'
 import 'isomorphic-fetch'
 
-const IndexHead = () => (
-  <Head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossOrigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet" />
-    <style>{`
-      body {
-        font-family: Roboto, sans-serif;
-        font-weight: 300;
-        font-size: 14px;
-        margin: 1rem 0;
-      }
-      h1 {
-        font-family: 'Roboto Condensed', sans-serif;
-        font-weight: 300;
-        font-size: 35px;
-        margin-top: 1rem;
-        margin-bottom: 2rem;
-      }
-    `}</style>
-  </Head>
-)
+import CustomHead from '../components/CustomHead'
 
 const Spinner = () => (
   <span><img src="https://i0.wp.com/cdnjs.cloudflare.com/ajax/libs/galleriffic/2.0.1/css/loader.gif?resize=32%2C32" /></span>
 )
+
+const Links = (props) => {
+  const prefixes = props.prefixes.slice();
+  prefixes.sort();
+  if (!prefixes || prefixes.length == 0) {
+    return (<Spinner />);
+  }
+  const groups = new Map();
+  for (const prefix of prefixes) {
+    const stripped = prefix.endsWith('/') ? prefix.substr(0, prefix.length - 1) : prefix;
+    const parts = stripped.split('/', 2);
+    if (parts.length == 1) {
+      groups.set(parts[0], { label: stripped, link: '/s3/' + prefix });
+    } else if (parts.length == 2) {
+      if (!groups.has(parts[0])) {
+        groups.set(parts[0], { label: parts[0], children: [] });
+      }
+      groups.get(parts[0]).children.push({ label: parts[1], link: '/s3/' + prefix });
+    }
+  }
+  const groupKeys = Array.from(groups.keys());
+  groupKeys.sort();
+  const items = groupKeys.map((key) => {
+    const value = groups.get(key);
+    if (value.link) {
+      return (
+        <li key={key}>
+          <strong><a href={value.link}>{value.label}</a></strong>
+        </li>
+      );
+    }
+    if (value.children) {
+      return (
+        <li key={key}>
+          <strong>{value.label}</strong>
+          <ul>
+            {value.children.map((x) => (
+              <li key={x.label}>
+                <a href={x.link}>{x.label}</a>
+              </li>
+            ))}
+          </ul>
+        </li>
+      );
+    }
+  });
+  return (<ul>{items}</ul>);
+}
 
 class IndexPage extends React.Component {
 
@@ -54,19 +80,14 @@ class IndexPage extends React.Component {
   render() {
     const { siteTitle } = this.props;
     const { prefixesWithIndex } = this.state;
-    const links = prefixesWithIndex.map((prefix) => (
-      <li key={prefix}><a href={'/s3/' + prefix}>{prefix}</a></li>
-    ))
     return (
       <div>
-        <IndexHead />
+        <CustomHead />
         <div className="container">
           <div className="row">
             <div className="col-md-8 offset-md-2">
               <h1>{siteTitle}</h1>
-              {links.length > 0 ? <ul>{links}</ul> : <Spinner />}
-              {/*<pre style={{color: '#ccc'}}>{JSON.stringify(this.props, null, 2)}</pre>*/}
-              {/*<pre style={{color: '#ccc'}}>{JSON.stringify(this.state, null, 2)}</pre>*/}
+              <Links prefixes={prefixesWithIndex} />
             </div>
           </div>
         </div>
