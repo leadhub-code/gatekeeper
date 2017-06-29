@@ -1,5 +1,5 @@
-const nconf = require('nconf');
-const yaml = require('js-yaml');
+import nconf from 'nconf'
+import yaml from 'js-yaml'
 
 const confPath = process.env.GATEKEEPER_CONF;
 

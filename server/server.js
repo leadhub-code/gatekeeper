@@ -1,14 +1,16 @@
-const express = require('express')
-const next = require('next')
+import express from 'express'
+import next from 'next'
 
-const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
-const session = require('express-session')
+import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
+import session from 'express-session'
 
-const passport = require('passport')
-const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy
+import passport from 'passport'
+import { OAuth2Strategy as GoogleStrategy } from 'passport-google-oauth'
 
-const AWS = require('aws-sdk')
+import AWS from 'aws-sdk'
+
+import configuration from './configuration'
 
 // make it easily stoppable if running inside Docker container
 Array.from(["SIGINT", "SIGTERM"]).map((sig) => {
@@ -16,8 +18,6 @@ Array.from(["SIGINT", "SIGTERM"]).map((sig) => {
     process.exit();
   })
 });
-
-const configuration = require('./configuration').default
 
 AWS.config.credentials = new AWS.Credentials({
   accessKeyId: configuration.get('aws:access_key_id'),
