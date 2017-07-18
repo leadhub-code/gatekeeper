@@ -47,6 +47,7 @@ export const authRouter = Router();
 
 authRouter.get('/auth/google/',
   passport.authenticate('google', {
+    prompt: 'select_account',
     scope: [
       'https://www.googleapis.com/auth/userinfo.email',
       'https://www.googleapis.com/auth/userinfo.profile',
