@@ -5,12 +5,14 @@ import configuration from './configuration'
 
 const router = Router();
 
-const s3 = new AWS.S3();
-
 AWS.config.credentials = new AWS.Credentials({
   accessKeyId: configuration.get('aws:access_key_id'),
   secretAccessKey: configuration.get('aws:access_key_secret'),
 });
+
+console.info('Configured AWS access key id:', configuration.get('aws:access_key_id'));
+
+const s3 = new AWS.S3();
 
 router.get('/api/s3/prefixes', (req, res) => {
   if (!req.user) {
