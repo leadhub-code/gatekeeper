@@ -13,7 +13,7 @@ export default (props) => (
         margin: 1rem 0;
       }
       h1 {
-        font-family: 'Roboto Condensed', sans-serif;
+        font-family: Roboto Condensed, Roboto, sans-serif;
         font-weight: 300;
         font-size: 35px;
         margin-top: 1rem;
