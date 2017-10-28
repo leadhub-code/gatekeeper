@@ -4,7 +4,7 @@ import yaml from 'js-yaml'
 const confPath = process.env.GATEKEEPER_CONF;
 
 if (!confPath) {
-  throw new Error("Path to configuration file must be defined in en GATEKEEPER_CONF");
+  throw new Error("Path to configuration file must be defined in env GATEKEEPER_CONF");
 } else {
   nconf.file({
     file: confPath,
