@@ -1,3 +1,5 @@
+import { Container, Button } from 'semantic-ui-react'
+
 import CustomHead from '../components/CustomHead'
 
 class IndexPage extends React.Component {
@@ -13,14 +15,17 @@ class IndexPage extends React.Component {
     return (
       <div>
         <CustomHead />
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 offset-md-2">
-              <h1>{siteTitle}</h1>
-              <a href="/auth/google/">Sign in with Google</a>
-            </div>
-          </div>
-        </div>
+        <Container text>
+          <h1>{siteTitle}</h1>
+          <Button
+            as='a'
+            href='/auth/google/'
+            color='google plus'
+            content='Sign in with Google'
+            icon='google'
+            labelPosition='left'
+          />
+        </Container>
       </div>
     )
   }

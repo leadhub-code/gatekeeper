@@ -2,19 +2,20 @@ import Head from 'next/head'
 
 export default (props) => (
   <Head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossOrigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.12/semantic.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,600" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:700" rel="stylesheet" />
     <style>{`
       body {
         font-family: Roboto, sans-serif;
         font-weight: 400;
         font-size: 16px;
-        margin: 1rem 0;
+        padding: 2rem 0;
       }
       h1 {
-        font-family: Roboto Condensed, Roboto, sans-serif;
-        font-weight: 300;
+        font-family: Lato, Roboto, sans-serif;
+        font-weight: 700;
         font-size: 35px;
         margin-top: 1rem;
         margin-bottom: 2rem;
@@ -26,7 +27,7 @@ export default (props) => (
         margin-top: .1rem;
       }
       strong {
-        font-weight: 500;
+        font-weight: 600;
       }
       a {
         color: #04a;

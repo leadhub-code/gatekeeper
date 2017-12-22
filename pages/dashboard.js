@@ -1,4 +1,5 @@
 import 'isomorphic-fetch'
+import { Container, Button, List } from 'semantic-ui-react'
 
 import CustomHead from '../components/CustomHead'
 
@@ -31,27 +32,39 @@ const Links = (props) => {
     const value = groups.get(key);
     if (value.link) {
       return (
-        <li key={key}>
+        <List.Item key={key}>
           <strong><a href={value.link}>{value.label}</a></strong>
-        </li>
+        </List.Item>
       );
     }
     if (value.children) {
       return (
-        <li key={key}>
-          <strong>{value.label}</strong>
-          <ul>
-            {value.children.map((x) => (
-              <li key={x.label}>
-                <a href={x.link}>{x.label}</a>
-              </li>
-            ))}
-          </ul>
-        </li>
+        <List.Item key={key} style={{ marginTop: 10 }}>
+          <List.Content>
+            <List.Header><big>{value.label}</big></List.Header>
+            <List.List style={{ marginLeft: '2em' }}>
+              {value.children.map((x) => (
+                <List.Item key={x.label}>
+                  <List.Content>
+                    {x.label === 'master' ? (
+                      <strong><a href={x.link}>{x.label}</a></strong>
+                    ) : (
+                      <a href={x.link}>{x.label}</a>
+                    )}
+                  </List.Content>
+                </List.Item>
+              ))}
+            </List.List>
+          </List.Content>
+        </List.Item>
       );
     }
   });
-  return (<ul>{items}</ul>);
+  return (
+    <List>
+      {items}
+    </List>
+  );
 }
 
 class IndexPage extends React.Component {
@@ -83,14 +96,10 @@ class IndexPage extends React.Component {
     return (
       <div>
         <CustomHead />
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 offset-md-2">
-              <h1>{siteTitle}</h1>
-              <Links prefixes={prefixesWithIndex} />
-            </div>
-          </div>
-        </div>
+        <Container text>
+          <h1>{siteTitle}</h1>
+          <Links prefixes={prefixesWithIndex} />
+        </Container>
       </div>
     )
   }
