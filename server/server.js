@@ -41,8 +41,6 @@ app.prepare()
     next();
   })
 
-  //server.get('/debug', (req, res) => res.json(req.user))
-
   server.use(authRouter);
   server.use(api);
 
@@ -55,7 +53,7 @@ app.prepare()
   })
 
   server.get('*', (req, res) => {
-    return handle(req, res)
+    return handle(req, res);
   })
 
   server.listen(3000, (err) => {

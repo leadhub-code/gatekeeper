@@ -61,6 +61,7 @@ router.get('/api/s3/prefixes', (req, res) => {
 
 router.get('/s3/*', (req, res) => {
   if (!req.user) {
+    req.session.redirectAfterLogin = req.path;
     res.redirect('/');
     return;
   }

@@ -10,7 +10,7 @@ passport.use(new GoogleStrategy({
     clientSecret:   configuration.get('google_oauth2:client_secret'),
     callbackURL:    configuration.get('google_oauth2:callback_url')
   },
-  function(accessToken, refreshToken, profile, done) {
+  (accessToken, refreshToken, profile, done) => {
     let allowedEmail = null;
     profile.emails.map((eml) => {
       if (eml.value && eml.type == 'account') {
@@ -21,8 +21,10 @@ passport.use(new GoogleStrategy({
       }
     });
     if (allowedEmail) {
-      // console.info('profile:', profile)
-      return done(null, { displayName: profile.displayName, email: allowedEmail });
+      return done(null, {
+        displayName: profile.displayName,
+        email: allowedEmail,
+      });
     } else {
       console.info('User not allowed:', profile)
       return done("Not allowed", null);
@@ -30,12 +32,12 @@ passport.use(new GoogleStrategy({
   }
 ))
 
-passport.serializeUser(function(user, done) {
-  done(null, user)
+passport.serializeUser((user, done) => {
+  done(null, user);
 })
 
-passport.deserializeUser(function(user, done) {
-  done(null, user)
+passport.deserializeUser((user, done) => {
+  done(null, user);
 })
 
 export function setupServer(server) {
@@ -56,6 +58,8 @@ authRouter.get('/auth/google/',
 
 authRouter.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
-  function(req, res) {
-    res.redirect('/')
+  (req, res) => {
+    const url = req.session.redirectAfterLogin;
+    req.session.redirectAfterLogin = null;
+    res.redirect(url || '/');
   });
