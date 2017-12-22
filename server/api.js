@@ -52,6 +52,7 @@ router.get('/api/s3/prefixes', (req, res) => {
   listFolders('').then((data) => {
     //console.info('done', data);
     //console.info('prefixesWithIndex:', JSON.stringify(prefixesWithIndex));
+    req.saveCachedPrefixesWithIndex(prefixesWithIndex);
     res.json({ prefixesWithIndex });
   }).catch((err) => {
     console.info(req.path, 'err:', err);

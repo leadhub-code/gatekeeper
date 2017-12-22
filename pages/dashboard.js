@@ -73,13 +73,14 @@ class IndexPage extends React.Component {
     return {
       siteTitle: req ? req.siteTitle : null,
       user: req ? req.user : null,
+      cachedPrefixesWithIndex: req ? req.cachedPrefixesWithIndex : null,
     }
   }
 
   constructor(props) {
     super(props);
     this.state = {
-      prefixesWithIndex: [],
+      prefixesWithIndex: null,
     };
   }
 
@@ -91,14 +92,14 @@ class IndexPage extends React.Component {
   }
 
   render() {
-    const { siteTitle } = this.props;
+    const { siteTitle, cachedPrefixesWithIndex } = this.props;
     const { prefixesWithIndex } = this.state;
     return (
       <div>
         <CustomHead />
         <Container text>
           <h1>{siteTitle}</h1>
-          <Links prefixes={prefixesWithIndex} />
+          <Links prefixes={cachedPrefixesWithIndex || prefixesWithIndex || []} />
         </Container>
       </div>
     )

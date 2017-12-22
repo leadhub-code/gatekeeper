@@ -35,8 +35,16 @@ app.prepare()
 
   setupServer(server);
 
+  const cache = {
+    prefixesWithIndex: null,
+  };
+
   server.use((req, res, next) => {
     req.siteTitle = configuration.get('site_title') || 'Gatekeeper';
+    req.cachedPrefixesWithIndex = cache.prefixesWithIndex;
+    req.saveCachedPrefixesWithIndex = prefixesWithIndex => {
+      cache.prefixesWithIndex = prefixesWithIndex;
+    };
     console.info('req:', req.user || '-', req.method, req.url);
     next();
   })
