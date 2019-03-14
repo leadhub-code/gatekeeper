@@ -1,7 +1,5 @@
 FROM node:8-stretch
 
-MAINTAINER Petr Messner
-
 RUN mkdir /app
 WORKDIR /app
 
