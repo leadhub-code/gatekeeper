@@ -1,5 +1,5 @@
 {
-  "name": "static-gate",
+  "name": "gatekeeper",
   "version": "0.0.3",
   "description": "Login gate for static files",
   "main": "index.js",
