@@ -1,13 +1,14 @@
 docker_image=gatekeeper
+npm=npm
 
 dev:
-	test -d node_modules || yarn install
-	yarn run dev
+	test -d node_modules || $(npm) install
+	$(npm) run dev
 
 run:
-	test -d node_modules || yarn install
-	yarn run build
-	yarn run start
+	test -d node_modules || $(npm) install
+	$(npm) run build
+	$(npm) run start
 
 docker-build:
 	docker build -t $(docker_image) .

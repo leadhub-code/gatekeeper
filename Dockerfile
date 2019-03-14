@@ -7,11 +7,11 @@ WORKDIR /app
 
 ENV NODE_ENV production
 
-COPY package.json yarn.lock /app/
-RUN yarn install
+COPY package.json package-lock.json /app/
+RUN npm install
 
 COPY . /app/
-RUN yarn run build
+RUN npm run build
 
 RUN useradd --create-home --system --uid 900 app
 USER app

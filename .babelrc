@@ -1,7 +1,13 @@
 {
   "presets": [
-    "next/babel",
-    "stage-0",
-    "es2015"
+    [
+      "next/babel",
+      {
+        "preset-env": {
+          "modules": "commonjs"
+        },
+      }
+    ]
   ],
+  "plugins": []
 }
