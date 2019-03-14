@@ -1,6 +1,6 @@
 {
   "name": "static-gate",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Login gate for static files",
   "main": "index.js",
   "repository": "https://github.com/leadhub-code/gatekeeper",
