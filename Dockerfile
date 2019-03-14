@@ -1,4 +1,4 @@
-FROM node:boron
+FROM node:8-stretch
 
 MAINTAINER Petr Messner
 
