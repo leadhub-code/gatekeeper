@@ -12,3 +12,6 @@ run:
 
 docker-build:
 	docker build -t $(docker_image) .
+
+docker-run:
+	docker run --rm -it -p 3000:3000 $(docker_run_args) $(docker_image)

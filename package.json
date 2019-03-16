@@ -7,9 +7,7 @@
   "author": "Petr Messner <petr.messner@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7.3.4",
     "@babel/preset-env": "^7.3.4",
-    "@babel/register": "^7.0.0",
     "aws-sdk": "^2.421.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
@@ -25,8 +23,13 @@
     "semantic-ui-react": "^0.77.2"
   },
   "scripts": {
-    "dev": "node server",
-    "build": "next build",
-    "start": "NODE_ENV=production node -r @babel/register server"
+    "dev": "node -r @babel/register server",
+    "build": "next build && babel server --out-dir server.dist",
+    "start": "exec env NODE_ENV=production node server.dist"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "@babel/register": "^7.0.0"
   }
 }

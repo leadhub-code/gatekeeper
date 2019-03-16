@@ -16,4 +16,4 @@ USER app
 
 EXPOSE 3000
 
-CMD ["node", "server"]
+CMD ["node", "server.dist"]

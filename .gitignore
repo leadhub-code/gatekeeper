@@ -2,3 +2,4 @@ node_modules
 .next
 local
 yarn-error.log
+server.dist
