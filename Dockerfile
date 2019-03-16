@@ -3,8 +3,6 @@ FROM node:8-stretch
 RUN mkdir /app
 WORKDIR /app
 
-ENV NODE_ENV production
-
 COPY package.json package-lock.json /app/
 RUN npm install
 
@@ -13,6 +11,8 @@ RUN npm run build
 
 RUN useradd --create-home --system --uid 900 app
 USER app
+
+ENV NODE_ENV=production
 
 EXPOSE 3000
 
