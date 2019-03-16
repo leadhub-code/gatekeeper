@@ -7,7 +7,6 @@
   "author": "Petr Messner <petr.messner@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@babel/preset-env": "^7.3.4",
     "aws-sdk": "^2.421.0",
     "body-parser": "^1.18.3",
     "cookie-parser": "^1.4.4",
@@ -30,6 +29,7 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
     "@babel/register": "^7.0.0"
   }
 }
