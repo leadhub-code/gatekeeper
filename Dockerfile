@@ -1,10 +1,10 @@
-FROM node:8-stretch
+FROM node:10-buster
 
 RUN mkdir /app
 WORKDIR /app
 
 COPY package.json package-lock.json /app/
-RUN npm install
+RUN npm ci
 
 COPY . /app/
 RUN npm run build
