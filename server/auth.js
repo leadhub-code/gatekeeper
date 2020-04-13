@@ -13,7 +13,7 @@ passport.use(new GoogleStrategy({
   (accessToken, refreshToken, profile, done) => {
     let allowedEmail = null;
     profile.emails.map((eml) => {
-      if (eml.value && eml.type == 'account') {
+      if (eml.value && (eml.type == 'account' || eml.verified === true)) {
         if (configuration.get('allowed_emails').indexOf(eml.value) != -1) {
           console.info(`E-mail ${eml.value} is listed in allowed_emails`);
           allowedEmail = eml.value;
